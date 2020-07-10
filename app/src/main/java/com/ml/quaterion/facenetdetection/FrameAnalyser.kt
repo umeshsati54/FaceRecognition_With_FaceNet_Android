@@ -23,6 +23,8 @@ import kotlin.math.sqrt
 // Analyser class to process frames and produce detections.
 class FrameAnalyser( context: Context , private var boundingBoxOverlay: BoundingBoxOverlay ) : ImageAnalysis.Analyzer {
 
+    private val main = MainActivity();
+
     // Configure the FirebaseVisionFaceDetector
     private val realTimeOpts = FirebaseVisionFaceDetectorOptions.Builder()
         .setPerformanceMode(FirebaseVisionFaceDetectorOptions.FAST)
@@ -72,21 +74,24 @@ class FrameAnalyser( context: Context , private var boundingBoxOverlay: Bounding
                                 // Crop the frame using face.boundingBox.
                                 // Convert the cropped Bitmap to a ByteBuffer.
                                 // Finally, feed the ByteBuffer to the FaceNet model.
-                                val subject = model.getFaceEmbedding( bitmap , face.boundingBox , true )
-                                Log.i( "Model" , "New frame received.")
+                                val subject = model.getFaceEmbedding(bitmap, face.boundingBox, true)
+                                Log.i("Model", "New frame received.")
                                 // Determine index and value of the highest similarity score.
                                 var highestSimilarityScore = -1f
                                 var highestSimilarityScoreName = ""
-                                for ( ( name , embedding ) in faceList ) {
-                                    val p = cosineSimilarity( subject , embedding )
-                                    Log.i( "Model" , "Similarity score for ${name} is ${p}.")
-                                    if ( p > highestSimilarityScore ) {
+                                for ((name, embedding) in faceList) {
+                                    val p = cosineSimilarity(subject, embedding)
+                                    Log.i("Model", "Similarity score for ${name} is ${p}.")
+                                    if (p > highestSimilarityScore) {
                                         highestSimilarityScore = p
                                         highestSimilarityScoreName = name
                                     }
                                 }
-                                Log.i( "Model" , "Person identified as ${highestSimilarityScoreName} with " +
-                                        "confidence of ${highestSimilarityScore * 100} %" )
+                                Log.i(
+                                    "Model",
+                                    "Person identified as ${highestSimilarityScoreName} with " +
+                                            "confidence of ${highestSimilarityScore * 100} %"
+                                )
                                 // Push the results in form of a Prediction.
                                 predictions.add(
                                     Prediction(
@@ -94,19 +99,23 @@ class FrameAnalyser( context: Context , private var boundingBoxOverlay: Bounding
                                         highestSimilarityScoreName
                                     )
                                 )
-                            }
-                            catch ( e : Exception ) {
+                            } catch (e: Exception) {
                                 // If any exception occurs if this box and continue with the next boxes.
                                 continue
                             }
                         }
 
+
                         // Clear the BoundingBoxOverlay and set the new results ( boxes ) to be displayed.
                         boundingBoxOverlay.faceBoundingBoxes = predictions
-                        boundingBoxOverlay.invalidate()
+
+                        main.runOnUiThread(Runnable {
+                            boundingBoxOverlay.invalidate()
+                        })
 
                         // Declare that the processing has been finished and the system is ready for the next frame.
                         isProcessing.set(false)
+
 
                     }.start()
                 }

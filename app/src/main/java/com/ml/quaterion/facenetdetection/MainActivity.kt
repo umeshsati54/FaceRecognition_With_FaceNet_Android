@@ -96,7 +96,13 @@ class MainActivity : AppCompatActivity() {
             progressDialog.show()
 
             val imagesDir = File( Environment.getExternalStorageDirectory().absolutePath + "/images" )
+            //val imagesDir = File( "file:///android_asset/images" )
+            //val imagesDir = File( assets"/images" )
+
             val imageSubDirs = imagesDir.listFiles()
+
+            //val imageSubDirs = imagesDir.list()
+
 
             val subDirNames = imageSubDirs.map { file -> file.name }
             val subjectImages = imageSubDirs.map { file -> BitmapFactory.decodeFile( file.listFiles()[0].absolutePath ) }

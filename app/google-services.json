@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "86763566490",
+    "firebase_url": "https://face-recognition-aacdc.firebaseio.com",
+    "project_id": "face-recognition-aacdc",
+    "storage_bucket": "face-recognition-aacdc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86763566490:android:f8a2634f5d35fbc882b623",
+        "android_client_info": {
+          "package_name": "com.ml.quaterion.facenetdetection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86763566490-ls3907kcf2qht32nruo7t2teo4qfhs1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ml.quaterion.facenetdetection",
+            "certificate_hash": "1d8469f5078d4ee4053b228e612e2a8c9fd14bdc"
+          }
+        },
+        {
+          "client_id": "86763566490-hnplrhougb6dbsvvpk44n5v3o3cuvkh7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0gv9xyAD3nFyCR2yiOMXNPUJGoRtJ4Bs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86763566490-hnplrhougb6dbsvvpk44n5v3o3cuvkh7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
